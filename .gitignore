@@ -1,0 +1,8 @@
+/.idea/
+/.flattened-pom.xml
+/distx.iml
+/distx-sample/target/
+/distx-sample/distx-sample.iml
+/distx-spring-boot-starter/target/classes/
+/distx-spring-boot-starter/.flattened-pom.xml
+/distx-spring-boot-starter/distx-spring-boot-starter.iml
