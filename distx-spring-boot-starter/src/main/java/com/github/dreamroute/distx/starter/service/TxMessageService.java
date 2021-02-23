@@ -37,4 +37,6 @@ public interface TxMessageService {
      */
     void syncTxMessage2RocketMq();
 
+    void addFaildTimes(long id);
+
 }

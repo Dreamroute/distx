@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 监听器，同步消息：DB -> MQ，事务消息执行和回查依赖此类，每个应用（微服务）消息生产者需要继承此类，并且添加 <code>@Service</code>和<code>@RocketMQTransactionListener</code>注解，其中<code>@RocketMQTransactionListener</code>

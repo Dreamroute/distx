@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
@@ -74,7 +75,13 @@ public class TxMessageServiceImpl implements TxMessageService {
         processMsgList(txMsgList);
     }
 
-    private void processMsgList(List<TxMessage> txMsgList) {
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void addFaildTimes(long id) {
+        txMessageMapper.addFaildTimes(id);
+    }
+
+    public void processMsgList(List<TxMessage> txMsgList) {
         if (txMsgList != null && !txMsgList.isEmpty()) {
             log.info("查询消息表：{}", JSON.toJSON(txMsgList));
         }
@@ -84,15 +91,17 @@ public class TxMessageServiceImpl implements TxMessageService {
                 txBody.setId(txMessage.getId());
                 txBody.setBody(txMessage.getBody());
 
-                TransactionSendResult result;
+                TransactionSendResult result = null;
                 Message<TxBody> msg = MessageBuilder.withPayload(txBody).build();
                 try {
+                    int a = 1/0;
                     result = rocketMqTemplate.sendMessageInTransaction(txMessage.getTopic() + ":" + txMessage.getTag(), msg, txMessage.getId());
                 } catch (Exception e) {
-                    log.error(e.getMessage() + e, e);
-                    throw new SdkException("同步DB -> MQ失败！");
+                    log.info("同步DB -> MQ失败!" + e, e);
+                    // 增加失败次数
+                    this.addFaildTimes(msg.getPayload().getId());
                 }
-                log.info("同步DB -> MQ结果: {}", JSON.toJSONString(result));
+                throw new SdkException("同步DB -> MQ结果: " + JSON.toJSONString(result));
             }
         }
     }

@@ -12,15 +12,6 @@ import java.util.List;
  */
 public interface TxMessageMapper {
 
-    /**
-     * 批量查询
-     * 
-     * @param minId 最小id
-     * @param maxId 最大id
-     * @return 返回消息列表
-     */
-    List<TxMessage> selectByIdRange(@Param("minId") long minId, @Param("maxId") long maxId);
-
     int insert(TxMessage message);
 
     TxMessage selectByPrimaryKey(Long id);
@@ -28,4 +19,6 @@ public interface TxMessageMapper {
     void deleteByPrimaryKey(Long id);
 
     List<TxMessage> selectTxMessageByPage(@Param("start") int start, @Param("limit") int limit);
+
+    void addFaildTimes(@Param("id") long id);
 }

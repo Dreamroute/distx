@@ -96,12 +96,6 @@ class TxMessageServiceTest {
     }
 
     @Test
-    void selectByIdRangeTest() {
-        List<TxMessage> result = txMessageMapper.selectByIdRange(56611L, 56615L);
-        System.err.println(result);
-    }
-
-    @Test
     void insertDbTest() throws InterruptedException {
         AtomicInteger count = new AtomicInteger(0);
         int size = 1;
