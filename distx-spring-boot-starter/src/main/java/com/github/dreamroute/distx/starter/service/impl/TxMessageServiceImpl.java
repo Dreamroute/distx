@@ -1,8 +1,8 @@
-package com.github.dreamroute.distx.sample.impl;
+package com.github.dreamroute.distx.starter.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.github.dreamroute.distx.sample.TxMessageDelService;
-import com.github.dreamroute.distx.sample.TxMessageService;
+import com.github.dreamroute.distx.starter.service.TxMessageDelService;
+import com.github.dreamroute.distx.starter.service.TxMessageService;
 import com.github.dreamroute.distx.starter.domain.TxMessage;
 import com.github.dreamroute.distx.starter.domain.TxMessageDel;
 import com.github.dreamroute.distx.starter.exception.SdkException;
@@ -68,9 +68,8 @@ public class TxMessageServiceImpl implements TxMessageService {
     @Override
     @Transactional(readOnly = true)
     public List<TxMessage> selectTxMessageByPage(int pageSize, int pageNo) {
-//        PageHelper.startPage(pageNo, pageSize);
-//        return txMessageMapper.selectAll();
-        return null;
+        int start = (pageNo - 1) * pageSize;
+        return txMessageMapper.selectTxMessageByPage(start, pageSize);
     }
 
     @Override

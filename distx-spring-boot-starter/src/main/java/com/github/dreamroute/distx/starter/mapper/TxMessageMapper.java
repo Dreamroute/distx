@@ -26,4 +26,6 @@ public interface TxMessageMapper {
     TxMessage selectByPrimaryKey(Long id);
 
     void deleteByPrimaryKey(Long id);
+
+    List<TxMessage> selectTxMessageByPage(@Param("start") int start, @Param("limit") int limit);
 }

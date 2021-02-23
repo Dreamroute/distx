@@ -1,8 +1,8 @@
-package com.github.dreamroute.distx.sample.impl;
+package com.github.dreamroute.distx.starter.service.impl;
 
 import com.github.dreamroute.distx.starter.domain.TxMessageCommit;
 import com.github.dreamroute.distx.starter.mapper.TxMessageCommitMapper;
-import com.github.dreamroute.distx.sample.TxMessageCommitService;
+import com.github.dreamroute.distx.starter.service.TxMessageCommitService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

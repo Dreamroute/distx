@@ -3,10 +3,12 @@ package com.github.dreamroute.distx.sample;
 import com.alibaba.fastjson.JSON;
 import com.github.dreamroute.distx.starter.domain.TxMessage;
 import com.github.dreamroute.distx.starter.mapper.TxMessageMapper;
+import com.github.dreamroute.distx.starter.service.TxMessageService;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Insert;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,13 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static com.ninja_squad.dbsetup.Operations.truncate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 /**
  * CRUD测试类
@@ -69,18 +74,25 @@ class TxMessageServiceTest {
                 .build();
         new DbSetup(new DataSourceDestination(dataSource), insert).launch();
         txMessageService.deleteById(1L);
+        TxMessage result = txMessageMapper.selectByPrimaryKey(1L);
+        Assertions.assertNull(result);
     }
-
-    private Long id;
-    private String topic;
-    private String tag;
-    private String body;
-    private Timestamp createTime;
 
     @Test
     void selectTxMessageByPageTest() {
-        List<TxMessage> data = txMessageService.selectTxMessageByPage(5, 3);
-        System.err.println(data);
+        Insert insert = insertInto("tx_message")
+                .columns("id", "topic", "tag", "body", "create_time")
+                .values(1L, "topic", "tag", "body", new Timestamp(System.currentTimeMillis()))
+                .values(2L, "topic", "tag", "body", new Timestamp(System.currentTimeMillis()))
+                .values(3L, "topic", "tag", "body", new Timestamp(System.currentTimeMillis()))
+                .values(4L, "topic", "tag", "body", new Timestamp(System.currentTimeMillis()))
+                .values(5L, "topic", "tag", "body", new Timestamp(System.currentTimeMillis()))
+                .values(6L, "topic", "tag", "body", new Timestamp(System.currentTimeMillis()))
+                .build();
+        new DbSetup(new DataSourceDestination(dataSource), insert).launch();
+        List<TxMessage> data = txMessageService.selectTxMessageByPage(2, 2);
+        List<Long> ids = data.stream().map(TxMessage::getId).collect(Collectors.toList());
+        assertIterableEquals(newArrayList(3L, 4L), ids);
     }
 
     @Test
@@ -158,9 +170,5 @@ class TxMessageServiceTest {
 //            Thread.sleep(Long.MAX_VALUE);
 //        }
 //    }
-    @Test
-    void startContainerTest() throws Exception {
-        Thread.sleep(Long.MAX_VALUE);
-    }
 
 }

@@ -27,6 +27,11 @@
             <artifactId>hikari-spring-boot-starter</artifactId>
             <version>1.3-RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.dreamroute</groupId>
+            <artifactId>sqlprinter-spring-boot-starter</artifactId>
+            <version>2.1.2-RELEASE</version>
+        </dependency>
     </dependencies>
 
 

@@ -1,4 +1,4 @@
-package com.github.dreamroute.distx.sample;
+package com.github.dreamroute.distx.starter.service;
 
 import com.github.dreamroute.distx.starter.domain.TxMessageDel;
 

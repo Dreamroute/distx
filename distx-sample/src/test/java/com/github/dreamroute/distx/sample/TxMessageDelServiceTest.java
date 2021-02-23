@@ -1,6 +1,7 @@
 package com.github.dreamroute.distx.sample;
 
 import com.github.dreamroute.distx.starter.domain.TxMessageDel;
+import com.github.dreamroute.distx.starter.service.TxMessageDelService;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Insert;

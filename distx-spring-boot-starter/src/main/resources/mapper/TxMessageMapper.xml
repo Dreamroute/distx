@@ -22,8 +22,11 @@
 	<select id="selectByPrimaryKey" parameterType="long" resultType="com.github.dreamroute.distx.starter.domain.TxMessage">
 		select * from tx_message where id = #{id}
 	</select>
+    <select id="selectTxMessageByPage" resultType="com.github.dreamroute.distx.starter.domain.TxMessage">
+		select * from tx_message limit #{start}, #{limit}
+	</select>
 
-	<delete id="deleteByPrimaryKey" parameterType="long">
+    <delete id="deleteByPrimaryKey" parameterType="long">
 		delete from tx_message where id = #{id} limit 1
 	</delete>
 </mapper>
