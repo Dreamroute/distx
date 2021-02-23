@@ -1,13 +1,13 @@
 package com.github.dreamroute.distx.starter.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.github.dreamroute.distx.starter.service.TxMessageDelService;
-import com.github.dreamroute.distx.starter.service.TxMessageService;
 import com.github.dreamroute.distx.starter.domain.TxMessage;
 import com.github.dreamroute.distx.starter.domain.TxMessageDel;
 import com.github.dreamroute.distx.starter.exception.SdkException;
 import com.github.dreamroute.distx.starter.mapper.TxMessageMapper;
 import com.github.dreamroute.distx.starter.rocketmq.TxBody;
+import com.github.dreamroute.distx.starter.service.TxMessageDelService;
+import com.github.dreamroute.distx.starter.service.TxMessageService;
 import com.vip.vjtools.vjkit.mapper.BeanMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.TransactionSendResult;
@@ -43,10 +43,6 @@ public class TxMessageServiceImpl implements TxMessageService {
     private int pageSize;
     @Value("${rocketmq.isTest:false}")
     private boolean isTest;
-    @Value("${rocketmq.txGroup}")
-    private String txGroup;
-
-    @Override
     public int insert(TxMessage message) {
         if (message.getCreateTime() == null) {
             message.setCreateTime(new Timestamp(System.currentTimeMillis()));
@@ -74,19 +70,7 @@ public class TxMessageServiceImpl implements TxMessageService {
 
     @Override
     public void syncTxMessage2RocketMq() {
-        // pageNo设置为1
-        this.syncTxMessage2RocketMq(1);
-    }
-
-    @Override
-    public void syncTxMessage2RocketMq(int pageNo) {
-        List<TxMessage> txMsgList = this.selectTxMessageByPage(pageSize, pageNo);
-        processMsgList(txMsgList);
-    }
-
-    @Override
-    public void syncTxMessage2RocketMq(long minId, long maxId) {
-        List<TxMessage> txMsgList = txMessageMapper.selectByIdRange(minId, maxId);
+        List<TxMessage> txMsgList = this.selectTxMessageByPage(pageSize, 1);
         processMsgList(txMsgList);
     }
 
@@ -103,7 +87,7 @@ public class TxMessageServiceImpl implements TxMessageService {
                 TransactionSendResult result;
                 Message<TxBody> msg = MessageBuilder.withPayload(txBody).build();
                 try {
-                    result = rocketMqTemplate.sendMessageInTransaction(txGroup, txMessage.getTopic() + ":" + txMessage.getTag(), msg, txMessage.getId());
+                    result = rocketMqTemplate.sendMessageInTransaction(txMessage.getTopic() + ":" + txMessage.getTag(), msg, txMessage.getId());
                 } catch (Exception e) {
                     log.error(e.getMessage() + e, e);
                     throw new SdkException("同步DB -> MQ失败！");

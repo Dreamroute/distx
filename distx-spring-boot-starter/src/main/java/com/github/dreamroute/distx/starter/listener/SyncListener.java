@@ -6,11 +6,13 @@ import com.github.dreamroute.distx.starter.rocketmq.TxBody;
 import com.github.dreamroute.distx.starter.service.TxMessageDelService;
 import com.github.dreamroute.distx.starter.service.TxMessageService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.Message;
+import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
@@ -22,6 +24,8 @@ import java.util.Random;
  * @author w.dehai
  */
 @Slf4j
+@Service
+@RocketMQTransactionListener
 public class SyncListener implements RocketMQLocalTransactionListener {
 
     @Autowired

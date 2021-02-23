@@ -37,19 +37,4 @@ public interface TxMessageService {
      */
     void syncTxMessage2RocketMq();
 
-    /**
-     * 将消息表的消息同步到MQ，业务系统不需要使用此方法
-     * 
-     * @param pageNo 页码
-     */
-    void syncTxMessage2RocketMq(int pageNo);
-
-    /**
-     * 根据id范围同步消息
-     * 
-     * @param minId 最小id
-     * @param maxId 最大id
-     */
-    void syncTxMessage2RocketMq(long minId, long maxId);
-
 }

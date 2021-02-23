@@ -24,7 +24,6 @@ public class MqProperties {
     private String secretKey;
 
     /** 本SDK配置信息 */
-    private String txGroup;
     private Boolean isTest;
     private Integer pageSize;
 
@@ -41,7 +40,6 @@ public class MqProperties {
         log.info("################RocketMQ配置信息################");
         log.info("#   accessKey: [{}]", accessKey);
         log.info("#   secretKey: [{}]", secretKey);
-        log.info("#   txGroup: [{}]", txGroup);
         log.info("#   isTest: [{}]", isTest);
         log.info("#   pageSize: [{}]", pageSize);
         log.info("#   topic: [{}]", topic);
@@ -50,9 +48,6 @@ public class MqProperties {
         log.info("");
 
         // 检查配置文件信息
-        if (StringUtils.isBlank(txGroup)) {
-            throw new IllegalArgumentException("必填，MQ级别的全局唯一（推荐：1.项目名+服务名+端口号， 2.UUID）");
-        }
         if (StringUtils.isNotBlank(topic)) {
             throw new IllegalArgumentException("必填，MQ级别的全局唯一");
         }
