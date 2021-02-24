@@ -12,7 +12,7 @@
 		select * from tx_message where id = #{id}
 	</select>
     <select id="selectTxMessageByPage" resultType="com.github.dreamroute.distx.starter.domain.TxMessage">
-		select * from tx_message limit #{start}, #{limit}
+		select * from tx_message where faild_times &lt; #{faildTimes} limit #{start}, #{limit}
 	</select>
 
     <delete id="deleteByPrimaryKey" parameterType="long">
