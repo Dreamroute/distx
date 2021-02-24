@@ -6,9 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 
  * @author w.dehai
- *
  */
 public interface TxMessageMapper {
 

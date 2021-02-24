@@ -10,7 +10,6 @@ import com.github.dreamroute.distx.starter.service.TxMessageDelService;
 import com.github.dreamroute.distx.starter.service.TxMessageService;
 import com.vip.vjtools.vjkit.mapper.BeanMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.rocketmq.client.producer.TransactionSendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,13 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
 
-import static com.alibaba.fastjson.JSON.toJSON;
 import static com.alibaba.fastjson.JSON.toJSONString;
 
 /**
- * 
  * @author w.dehai
- *
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -95,12 +91,11 @@ public class TxMessageServiceImpl implements TxMessageService {
                 txBody.setId(txMessage.getId());
                 txBody.setBody(txMessage.getBody());
 
-                TransactionSendResult result = null;
                 Message<TxBody> msg = MessageBuilder.withPayload(txBody).build();
                 try {
-                    result = rocketMqTemplate.sendMessageInTransaction(txMessage.getTopic() + ":" + txMessage.getTag(), msg, txMessage.getId());
+                    rocketMqTemplate.sendMessageInTransaction(txMessage.getTopic() + ":" + txMessage.getTag(), msg, txMessage.getId());
                 } catch (Exception e) {
-                    log.info("同步DB -> MQ失败, msg: " + toJSONString(txMessage) + "result: " + toJSON(result));
+                    log.info("同步DB -> MQ失败, msg: " + toJSONString(txMessage));
                     log.info("", e);
                     // 增加失败次数
                     this.addFaildTimes(msg.getPayload().getId());

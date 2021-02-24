@@ -9,9 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 
 /**
- * 
  * @author w.dehai
- *
  */
 @Transactional(rollbackFor = Exception.class)
 public class TxMessageCommitServiceImpl implements TxMessageCommitService {

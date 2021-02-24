@@ -5,6 +5,9 @@ import com.github.dreamroute.distx.starter.service.TxMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
+/**
+ * @author w.dehi
+ */
 public class SyncTask {
 
     @Autowired
