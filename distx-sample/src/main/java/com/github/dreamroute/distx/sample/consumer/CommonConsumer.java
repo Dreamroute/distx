@@ -26,6 +26,8 @@ public class CommonConsumer implements RocketMQListener<TxBody> {
             log.info(toJSONString(body));
             log.info("TxBody: {}", JSON.toJSONString(body));
 
+            // 业务就写在这里
+
             // 消费过的记录入库，在面对极端情况时候可以手动对账、补偿
             TxMessageCommit msg = new TxMessageCommit();
             msg.setMessageTableId(body.getId());
