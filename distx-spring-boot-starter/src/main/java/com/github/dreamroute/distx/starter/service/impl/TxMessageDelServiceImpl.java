@@ -1,7 +1,7 @@
 package com.github.dreamroute.distx.starter.service.impl;
 
 import com.github.dreamroute.distx.starter.domain.TxMessageDel;
-import com.github.dreamroute.distx.starter.mapper.TxMessageDelMapper;
+import com.github.dreamroute.distx.starter.mapper.producer.TxMessageDelMapper;
 import com.github.dreamroute.distx.starter.service.TxMessageDelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

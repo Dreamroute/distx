@@ -3,9 +3,11 @@ package com.github.dreamroute.distx.starter.rocketmq;
 import com.github.dreamroute.distx.starter.exception.DistxException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.Configuration;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
@@ -19,8 +21,8 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  */
 @Data
 @Slf4j
-@Configuration
 @ConfigurationProperties(prefix = "distx")
+//@MapperScan({"com.github.dreamroute.distx.starter.mapper"})
 public class DistxProperties {
 
     public static final String IS_TEST_VALUE = "${distx.isTest: false}";
@@ -28,6 +30,8 @@ public class DistxProperties {
     public static final String CRON_VALUE = "${distx.cron: */3 * * * * ?}";
     public static final String TOPIC_VALUE = "${distx.topic}";
     public static final String FAILD_TIMES_VALUE = "${distx.faildTimes: 5}";
+    public static final String MAPPER_PRODUCER_LOCATIONS = "com.github.dreamroute.distx.starter.mapper.producer";
+    public static final String MAPPER_CONSUMER_LOCATIONS = "com.github.dreamroute.distx.starter.mapper.consumer";
 
     // 是否是用于测试
     @Value(IS_TEST_VALUE)

@@ -2,7 +2,7 @@ package com.github.dreamroute.distx.sample;
 
 import com.alibaba.fastjson.JSON;
 import com.github.dreamroute.distx.starter.domain.TxMessage;
-import com.github.dreamroute.distx.starter.mapper.TxMessageMapper;
+import com.github.dreamroute.distx.starter.mapper.producer.TxMessageMapper;
 import com.github.dreamroute.distx.starter.service.TxMessageService;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;

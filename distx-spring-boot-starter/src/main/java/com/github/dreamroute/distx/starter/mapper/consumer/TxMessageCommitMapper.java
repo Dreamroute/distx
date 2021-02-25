@@ -1,4 +1,4 @@
-package com.github.dreamroute.distx.starter.mapper;
+package com.github.dreamroute.distx.starter.mapper.consumer;
 
 import com.github.dreamroute.distx.starter.domain.TxMessageCommit;
 

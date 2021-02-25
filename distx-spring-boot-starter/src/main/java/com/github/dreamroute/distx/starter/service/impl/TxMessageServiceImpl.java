@@ -3,7 +3,7 @@ package com.github.dreamroute.distx.starter.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.github.dreamroute.distx.starter.domain.TxMessage;
 import com.github.dreamroute.distx.starter.domain.TxMessageDel;
-import com.github.dreamroute.distx.starter.mapper.TxMessageMapper;
+import com.github.dreamroute.distx.starter.mapper.producer.TxMessageMapper;
 import com.github.dreamroute.distx.starter.rocketmq.DistxProperties;
 import com.github.dreamroute.distx.starter.rocketmq.TxBody;
 import com.github.dreamroute.distx.starter.service.TxMessageDelService;
