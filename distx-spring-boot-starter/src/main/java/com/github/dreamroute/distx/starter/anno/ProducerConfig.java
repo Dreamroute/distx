@@ -10,12 +10,14 @@ import com.github.dreamroute.distx.starter.service.impl.TxMessageServiceImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 生产者
  *
  * @author w.dehi
  */
+@EnableScheduling
 @EnableConfigurationProperties(DistxProperties.class)
 @MapperScan(DistxProperties.MAPPER_PRODUCER_LOCATIONS)
 public class ProducerConfig {
