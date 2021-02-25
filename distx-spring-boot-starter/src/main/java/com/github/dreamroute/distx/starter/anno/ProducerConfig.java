@@ -1,7 +1,6 @@
 package com.github.dreamroute.distx.starter.anno;
 
 import com.github.dreamroute.distx.starter.listener.SyncListener;
-import com.github.dreamroute.distx.starter.listener.SyncTask;
 import com.github.dreamroute.distx.starter.rocketmq.DistxProperties;
 import com.github.dreamroute.distx.starter.service.TxMessageDelService;
 import com.github.dreamroute.distx.starter.service.TxMessageService;
@@ -10,14 +9,12 @@ import com.github.dreamroute.distx.starter.service.impl.TxMessageServiceImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 生产者
  *
  * @author w.dehi
  */
-@EnableScheduling
 @EnableConfigurationProperties(DistxProperties.class)
 @MapperScan(DistxProperties.MAPPER_PRODUCER_LOCATIONS)
 public class ProducerConfig {
@@ -34,11 +31,6 @@ public class ProducerConfig {
     @Bean
     public SyncListener syncListener() {
         return new SyncListener();
-    }
-
-    @Bean
-    public SyncTask syncTask() {
-        return new SyncTask();
     }
 
 }

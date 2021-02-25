@@ -15,7 +15,7 @@ import static com.alibaba.fastjson.JSON.toJSONString;
 @Slf4j
 @Service
 @AllArgsConstructor
-@RocketMQMessageListener(topic = "distx", selectorExpression = "m", consumerGroup = "distx")
+@RocketMQMessageListener(topic = "distx", selectorExpression = "order-create", consumerGroup = "order-create")
 public class CommonConsumer implements RocketMQListener<TxBody> {
 
     private final TxMessageCommitService txMessageCommitService;
@@ -32,7 +32,7 @@ public class CommonConsumer implements RocketMQListener<TxBody> {
             msg.setBody(body.getBody());
             txMessageCommitService.insert(msg);
 
-            log.info("消费, {}", body.getBody());
+            log.info("消费消息, body: {}", body.getBody());
 
         } catch (Exception e) {
             throw new RuntimeException("业务异常" + e, e);
