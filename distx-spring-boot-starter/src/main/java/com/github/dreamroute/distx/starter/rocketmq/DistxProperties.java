@@ -21,11 +21,11 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 @ConfigurationProperties(prefix = "distx")
 public class DistxProperties {
 
-    public static final String IS_TEST_VALUE = "${distx.is-test: false}";
-    public static final String PAGE_SIZE_VALUE = "${distx.page-size: 3}";
-    public static final String CRON_VALUE = "${distx.cron: */3 * * * * ?}";
+    public static final String IS_TEST_VALUE = "${distx.is-test:false}";
+    public static final String PAGE_SIZE_VALUE = "${distx.page-size:3}";
+    public static final String CRON_VALUE = "${distx.cron:*/3 * * * * ?}";
     public static final String TOPIC_VALUE = "${distx.topic}";
-    public static final String FAILD_TIMES_VALUE = "${distx.faild-times: 5}";
+    public static final String FAILD_TIMES_VALUE = "${distx.faild-times:5}";
     public static final String MAPPER_PRODUCER_LOCATIONS = "com.github.dreamroute.distx.starter.mapper.producer";
     public static final String MAPPER_CONSUMER_LOCATIONS = "com.github.dreamroute.distx.starter.mapper.consumer";
 
