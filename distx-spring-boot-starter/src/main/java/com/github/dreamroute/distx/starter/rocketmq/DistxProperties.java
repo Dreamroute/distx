@@ -23,7 +23,6 @@ public class DistxProperties {
 
     public static final String IS_TEST_VALUE = "${distx.is-test:false}";
     public static final String PAGE_SIZE_VALUE = "${distx.page-size:3}";
-    public static final String CRON_VALUE = "${distx.cron:*/3 * * * * ?}";
     public static final String TOPIC_VALUE = "${distx.topic}";
     public static final String FAILD_TIMES_VALUE = "${distx.faild-times:5}";
     public static final String MAPPER_PRODUCER_LOCATIONS = "com.github.dreamroute.distx.starter.mapper.producer";
@@ -36,10 +35,6 @@ public class DistxProperties {
     // 同步消息时每次查询数据库的行数
     @Value(PAGE_SIZE_VALUE)
     private Integer pageSize = 3;
-
-    // 同步消息的频率
-    @Value(CRON_VALUE)
-    private String cron = "*/3 * * * * ?";
 
     // Topic，全局唯一，每个应用使用一个topic，应用下的不同业务使用Tag区分
     @Value(TOPIC_VALUE)
@@ -68,7 +63,6 @@ public class DistxProperties {
         log.info("#   topic: {}", topic);
         log.info("#   isTest: {}{}", isTest, errorMsg);
         log.info("#   pageSize: {}", pageSize);
-        log.info("#   cron: {}", cron);
         log.info("#   faildTimes: {}", faildTimes);
 //        log.info("#   nameServer: {}", nameServer);
 //        log.info("#   producerGroup: {}", producerGroup);
