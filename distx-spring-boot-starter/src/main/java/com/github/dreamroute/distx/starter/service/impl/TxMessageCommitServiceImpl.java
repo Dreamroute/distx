@@ -3,9 +3,9 @@ package com.github.dreamroute.distx.starter.service.impl;
 import com.github.dreamroute.distx.starter.domain.TxMessageCommit;
 import com.github.dreamroute.distx.starter.mapper.consumer.TxMessageCommitMapper;
 import com.github.dreamroute.distx.starter.service.TxMessageCommitService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.sql.Timestamp;
 
 /**
@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @Transactional(rollbackFor = Exception.class)
 public class TxMessageCommitServiceImpl implements TxMessageCommitService {
 
-    @Autowired
+    @Resource
     private TxMessageCommitMapper txMessageCommitMapper;
 
     @Override
