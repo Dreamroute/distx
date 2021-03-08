@@ -33,8 +33,7 @@ class MQTest {
 
     @Test
     void sentSyncTest() throws Exception {
-        long i = 1;
-        while (true) {
+        for (long i=0; i<100; i++) {
             TxBody body1 = new TxBody();
             body1.setId(i);
             body1.setBody(ORDER_CREATE + i);
@@ -45,7 +44,6 @@ class MQTest {
 
             i++;
             rocketMQTemplate.syncSend(topic + ":" + ORDER_CREATE, MessageBuilder.withPayload(body1).build());
-            SECONDS.sleep(2L);
             rocketMQTemplate.syncSend(topic + ":" + WMS_DECREMENT, MessageBuilder.withPayload(body2).build());
         }
     }
