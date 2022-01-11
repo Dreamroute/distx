@@ -19,7 +19,7 @@
 
     <properties>
         <!-- 版本信息 -->
-        <revision>2.0-RELEASE</revision>
+        <revision>2.1-RELEASE</revision>
 
         <!-- 编码相关 -->
         <java.version>1.8</java.version>
@@ -34,9 +34,7 @@
         <vjkit.version>1.0.8</vjkit.version>
         <dozer.version>5.5.1</dozer.version>
         <druid.version>1.1.14</druid.version>
-        <guava.version>30.1-jre</guava.version>
-        <fastjson.version>1.2.75</fastjson.version>
-        <rocketmq-spring-boot-starter.version>2.2.0</rocketmq-spring-boot-starter.version>
+        <rocketmq-spring-boot-starter.version>2.2.1</rocketmq-spring-boot-starter.version>
 
     </properties>
 
@@ -61,18 +59,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
         </dependency>
 
         <!-- MyBatis -->
